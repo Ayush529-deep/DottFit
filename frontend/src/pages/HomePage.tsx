@@ -17,7 +17,10 @@ import coachImg from "@/assets/coach-joseph.png";
 export default function HomePage() {
   const [testimonials, setTestimonials] = useState([]);
   const { i18n } = useTranslation();
-  const lang = i18n.language || "en"; // current language
+  // const lang = i18n.language || "en"; // current language
+  const lang = (["en","hi","te"].includes(i18n.language?.split("-")[0]) 
+  ? i18n.language.split("-")[0] 
+  : "en") as "en" | "hi" | "te";
 
   useEffect(() => {
     fetch(`${BASE_URL}/testimonials`)
@@ -43,13 +46,16 @@ export default function HomePage() {
         <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-[80px] h-full flex items-center">
           <div className="w-full md:w-[45%] text-white py-8 sm:py-10 md:py-0">
             <h1 className="font-semibold mb-5 md:mb-6 leading-tight text-[26px] sm:text-[30px] md:text-[36px] lg:text-[40px]">
-              {t.hero.title[lang].split(". ").map((line, i) => (
+                 {/* /* {t.hero.title[lang].split(". ").map((line, i) => (   */ */}
+               {(t.hero.title[lang] || "").split(". ").map((line, i) => (
+
                 <span key={i} className="block">{line}</span>
               ))}
             </h1>
 
             <p className="text-white/80 mb-6 text-[14px] sm:text-[15px] md:text-[15px] lg:text-[16px] leading-[24px] sm:leading-[26px] md:leading-[26px] lg:leading-[28px] mx-auto md:mx-0">
-              {t.hero.subtitle[lang]}
+              {/* /* {t.hero.subtitle[lang]} */ */}
+              {(t.hero.subtitle[lang] || "")}
             </p>
 
             <div className="flex flex-col gap-3 mb-8 w-full md:w-fit items-center md:items-start">
@@ -57,7 +63,8 @@ export default function HomePage() {
                 to="/transformation"
                 className="w-full md:min-w-[320px] text-center bg-[#F5B940] text-[#0F1E33] px-5 sm:px-6 md:px-8 lg:px-10 py-3.5 md:py-4 rounded-2xl font-semibold tracking-wide hover:bg-[#e6ac32] transition whitespace-nowrap text-[13px] sm:text-[14px] md:text-[14px] lg:text-base"
               >
-                {t.hero.transformationBtn[lang]}
+                {/* /* {t.hero.transformationBtn[lang]} */ */}
+                  {(t.hero.transformationBtn[lang] || "")}
               </Link>
 
               <Link
@@ -67,12 +74,16 @@ export default function HomePage() {
                 <svg className="border-svg" xmlns="http://www.w3.org/2000/svg">
                   <rect className="border-rect" rx="16" ry="16" pathLength="100" />
                 </svg>
-                <span className="relative z-10">{t.hero.programsBtn[lang]}</span>
+                <span className="relative z-10">
+                  {/* /* {t.hero.programsBtn[lang]} */ */}
+                   {(t.hero.programsBtn[lang] || "")}
+                </span>
               </Link>
             </div>
 
             <div className="flex flex-wrap gap-y-2 text-white/80 text-[15px] sm:text-[16px] md:text-[16px] lg:text-[18px]">
-              {t.hero.features[lang].map((feature, i) => (
+              {/* /* {t.hero.features[lang].map((feature, i) => ( */ */}
+              {(t.hero.features[lang] || []).map((feature, i) => (
                 <span key={i} className="flex items-center gap-2 px-2"><Check size={14} /> {feature}</span>
               ))}
             </div>
